@@ -12,6 +12,13 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'teamNameFont';
+    src: url('teamName/sansation_regular-webfont.woff2') format('woff2'),
+         url('teamName/sansation_regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i');
 
 #socialMediaSidebar{
