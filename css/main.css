@@ -66,3 +66,25 @@ body{
 .mySlides {display:none;}
 
 .w3-badge {height:13px;width:13px;padding:0}
+
+.teamButton:hover{
+  background-color: #f98d85;
+}
+
+.teamButton{
+  background-color:#e11a0c;
+}
+
+.teamDiv{
+  max-width: 50%;
+  text-decoration: none;
+  padding: 20px;
+  margin: 30px auto;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.teamDisplayed{
+  max-width: 50%;
+  text-decoration: none;
+}
