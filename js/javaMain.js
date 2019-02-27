@@ -99,12 +99,14 @@ const teamData = [
 
 var pageId = -1;
 var teamInfoPage = window.location.href.substring(132);
-/*for(var i = 0; i<teamData.length; i++){
-	if(teamData[i].number.toString().indexOf(teamInfoPage) != -1){
-		pageIdThing = i;
-		break;
+if(window.location.href.indexOf("teamInfo") != -1){
+	for(var i = 0; i<teamData.length; i++){
+		if(teamData[i].number.indexOf(teamInfoPage) == 0){
+			pageId = i;
+			break;
+		}
 	}
-}*/
+}
 
 
 function awardDisplay(awards){
