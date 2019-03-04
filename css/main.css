@@ -63,7 +63,8 @@ body{
 	padding-top: 18px;
 }
 
-.mySlides {display:none;}
+.teamSlide {display:none;}
+.teamCaption {display:none;}
 
 .w3-badge {height:13px;width:13px;padding:0}
 
@@ -87,4 +88,10 @@ body{
 .teamDisplayed{
   max-width: 50%;
   text-decoration: none;
+}
+
+.hrAward{
+  border: 3px solid #f44336;
+  border-radius: 2px;
+  margin: 2px auto 10px;
 }

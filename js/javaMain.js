@@ -1,11 +1,33 @@
 const teamData = [
 	{
+		name: "Vector Shock",
+		number: "121X",
+		region: "Indiana",
+		bio: "",
+		location: "Indianapolis, Indiana",
+		awards2019: [`<strong>Excellence Award x2</strong>`,`<strong>Tournament Champion</strong>`,"Tournament Finalist x3","Robot Skills Finalist"],
+		tournamentsWon: 1,
+		imgHref: ["../img/teamPictures/25461Z-1.jpg"],
+		imgCaption: ["25461Z's Bot Excelsior"]
+	},
+	{
 		name: "Supernova",
 		number: "136S",
 		region: "Texas",
 		bio: "",
 		location: "Richardson, Texas",
 		awards2019: ["Tournament Finalist","Robot Skills Finalist","Judges Award","Amaze Award"]
+	},
+	{
+		name: "DiscoBots Zephyr",
+		number: "285Z",
+		region: "Texas",
+		bio: "",
+		location: "Houston, Texas",
+		awards2019: [`<strong>South Texas State Finalist</strong>`,`<strong>Excellence Award x2</strong>`,`<strong>Tournament Champion x4</strong>`,`<strong>Robot Skills Champion x2</strong>`,"Tournament Finalist x3","Robot Skills Finalist"],
+		tournamentsWon: 4,
+		imgHref: ["../img/teamPictures/25461Z-1.jpg"],
+		imgCaption: ["25461Z's Bot Excelsior"]
 	},
 	{
 		name: "OPS Nebraska Nerd Herd",
@@ -22,6 +44,17 @@ const teamData = [
 		bio: "",
 		location: "Cumming, Texas",
 		awards2019: ["Tournament Finalist x2"]
+	},
+	{
+		name: "FaZe Clan",
+		number: "2011F",
+		region: "Ohio",
+		bio: "",
+		location: "Broadview Heights, Ohio",
+		awards2019: [`<strong>Ohio State Champion</strong>`,`<strong>Excellence Award</strong>`,`<strong>Tournament Champion x4</strong>`,`<strong>Robot Skills Champion x2</strong>`,"Tournament Finalist x2","Robot Skills Finalist"],
+		tournamentsWon: 5,
+		imgHref: ["../img/teamPictures/25461Z-1.jpg"],
+		imgCaption: ["25461Z's Bot Excelsior"]
 	},
 	{
 		name: "Apex",
@@ -133,7 +166,9 @@ const teamData = [
 		bio: "",
 		location: "Fate, Texas",
 		awards2019: [`<strong>North Texas State Finalist</strong>`,`<strong>North Texas State Skills Finalist</strong>`,`<strong>Excellence Award x3</strong>`,`<strong>Tournament Champion x6</strong>`,`<strong>Robot Skills Champion x6</strong>`,"Robot Skills Finalist x4","Design Award x2","Judges Award x2"],
-		tournamentsWon: 6
+		tournamentsWon: 6,
+		imgHref: ["../img/teamPictures/25461Z-1.jpg","../img/teamPictures/25461Z-2.jpg","../img/teamPictures/25461Z-3.jpg","../img/teamPictures/25461Z-4.jpg"],
+		imgCaption: ["25461Z's Bot Excelsior","Close up of the flywheel","Cap manipulator in action","Cap scored"]
 	},
 	{
 		name: "Allumination Robotics",
@@ -161,12 +196,25 @@ const teamData = [
 		location: "Solihull, United Kingdom",
 		awards2019: [`<strong>Tournament Champion x3</strong>`,"Tournament Finalist",],
 		tournamentsWon: 1
+	},
+	{
+		name: "[Cu]riosity",
+		number: "96498A",
+		region: "Australia",
+		bio: "",
+		location: "Sydenham, Australia",
+		awards2019: [`<strong>Australia National Excellence Award</strong>`,`<strong>Australia National Champion</strong>`,`<strong>Excellence Award</strong>`,"Design Award","Judges Award"],
+		tournamentsWon: 1,
+		imgHref: ["../img/teamPictures/25461Z-1.jpg"],
+		imgCaption: ["25461Z's Bot Excelsior"]
 	}
 ];
 
 var pageId = -1;
 //var teamInfoPage = window.location.href.substring(51);
 var teamInfoPage = window.location.href.substring(132);
+//var locationInfo = window.location.href.substring(42);
+var locationInfo = window.location.href.substring(123);
 if(window.location.href.indexOf("teamInfo") != -1){
 	for(var i = 0; i<teamData.length; i++){
 		if(teamData[i].number.indexOf(teamInfoPage) == 0){
@@ -176,7 +224,7 @@ if(window.location.href.indexOf("teamInfo") != -1){
 	}
 }
 
-var regionsList = ["California","Georgia","Minnesota","Nebraska","Oklahoma","Texas","UK","Virginia"];
+var regionsList = ["Australia","California","Georgia","Indiana","Minnesota","Nebraska","Ohio","Oklahoma","Texas","UK","Virginia"];
 var tournamentChampCount = 0;
 for(var i =0; i<teamData.length; i++){
 	if(teamData[i].tournamentsWon){
@@ -184,15 +232,76 @@ for(var i =0; i<teamData.length; i++){
 	}
 }
 
+function br(){
+	return `<br>`
+}
+
+/*<img src="${src}" class="w3-round" style="width:100%">
+<div class="w3-container">
+	<h5><i>${teamData[pageId].imgCaption}</i></h5>
+</div>*/
+function infoBox(teamId){
+	return `
+	<h4 style="margin-bottom:2px;margin-top:2px;"><strong>Information</strong></h4>
+	<hr class="hrAward" style="width:70%">
+	<table class="w3-table-all w3-hoverable w3-card-4">
+		<tr>
+			<th>Team Name:</th>
+			<th>${teamId.name}</th>
+		</tr>
+		<tr>
+			<th>Team Number:</th>
+			<th>${teamId.number}</th>
+		</tr>
+		<tr>
+			<th>Location:</th>
+			<th>${teamId.location}</th>
+		</tr>
+	</table>
+	`;
+}
 
 function awardDisplay(awards){
 	return `
-		<h4><strong>Awards</strong></h4>
-		<ul class=" w3-ul w3-card-4 w3-center w3-white" style="width:50%;margin:auto">
+		<h4 style="margin-bottom:2px;margin-top:2px;"><strong>Awards</strong></h4>
+		<hr class="hrAward" style="width:70%">
+		<ul class=" w3-ul w3-card-4 w3-center w3-white" style="width:100%;margin: 10px auto 0px">
 			${awards.map(award => `<li>${award}</li>`).join("")}
 		</ul>
 	`;
-	//
+}
+
+function displayTeamImg(src, cap){
+	return `
+		<div class="w3-card-4 w3-round">
+			<div class="w3-content w3-display-container" style="max-width:70%;padding:10px;">
+				${src.map(url => `<img class="teamSlide w3-animate-zoom w3-round" src="${url}" style="width:100%;">`).join("")}
+				<div class="w3-center w3-container w3-section w3-large" style="margin-bottom:0px;">
+					${cap.map(text => `<h5 class="teamCaption w3-center w3-animate-zoom w3-round" style="margin-top:0px;">${text}</h5>`).join("")}
+					<div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+					<div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+				</div>
+			</div>
+		</div>
+	`;
+}
+
+var slideIndex = 1;
+function plusDivs(n){
+	showDivs(slideIndex += n);
+}
+
+function showDivs(n){
+	var x = document.getElementsByClassName("teamSlide");
+	var y = document.getElementsByClassName("teamCaption");
+	if(n > x.length){ slideIndex = 1;}
+	if(n < 1){slideIndex = x.length}
+	for(var i = 0; i<x.length; i++){
+		x[i].style.display = "none";
+		y[i].style.display = "none";
+	}
+	x[slideIndex-1].style.display = "block";
+	y[slideIndex-1].style.display = "block";
 }
 
 /* ---> (teamNumber).html Template <---*/
@@ -200,22 +309,31 @@ function awardDisplay(awards){
 if(pageId != -1){
 	document.title = "Cyclone Alliance - " + teamData[pageId].number;
 	document.getElementById("teamInfo").innerHTML = `
-		<h1><strong>${teamData[pageId].name} - ${teamData[pageId].number}</strong></h1>
-		<br>
-		${teamData[pageId].awards2019 ? awardDisplay(teamData[pageId].awards2019) : ""}
+		<div class="w3-row-padding" style="margin-top:20px;">
+			<div class="w3-twothird" style="margin-bottom:10px;">
+				${teamData[pageId].imgHref ? displayTeamImg(teamData[pageId].imgHref,teamData[pageId].imgCaption) : br()}
+			</div>
+			<div class="w3-third">
+				<div class="w3-card-4 w3-round" style="padding:10px;margin-bottom:10px;">
+					${infoBox(teamData[pageId])}
+				</div>
+				<div class="w3-card-4 w3-round" style="padding:10px;margin-bottom:10px;">
+					${teamData[pageId].awards2019 ? awardDisplay(teamData[pageId].awards2019) : ""}
+				</div>
+			</div>
+		</div>
 	`;
+	showDivs(slideIndex);
 }
 
 /* ---> teams.html List Template <---*/
 
 var targetRegion;
-var locationInfo = window.location.href.substring(123);
-//var locationInfo = window.location.href.substring(42);
 
 function teamTemplate(team){
 	return `
 		<a href="teams/teamInfo.html?${team.number}" class="teamDisplayed ${team.region}">
-			<div class="teamDiv teamDisplayed ${team.region} w3-theme-d2 w3-hover-theme-l1 w3-card-4 w3-animate-zoom">
+			<div class="teamDiv w3-round teamDisplayed ${team.region} w3-theme-d2 w3-hover-theme-l1 w3-card-4 w3-animate-zoom">
 				<h2>${team.name} - ${team.number}</h2>
 			</div>
 		</a>
@@ -229,8 +347,10 @@ function displayTeam(team){
 }
 
 function startList(region){
+	var returnRegion;
 	return `
-	<h1 class="regionHeader ${region}">${region.indexOf("UK") != -1 ? "United Kingdom" : region}</h1>
+	<script>${returnRegion = region.indexOf("UK") != -1 ? "United Kingdom" : region}</script>
+	<h1 class="regionHeader ${region}">${returnRegion}</h1>
 	<script>${targetRegion = region}</script>
 	${teamData.map(displayTeam).join("")}
 	<br class="regionHeader ${region}">
@@ -321,28 +441,4 @@ function openLink(evt, linkName) {
 	}
 	document.getElementById(linkName).style.display = "block";
 	evt.currentTarget.firstElementChild.className += " w3-border-red";
-}
-
-function plusDivs(n) {
-	showDivs(slideIndex += n);
-}
-
-function currentDiv(n) {
-	showDivs(slideIndex = n);
-}
-
-function showDivs(n) {
-	var i;
-	var x = document.getElementsByClassName("mySlides");
-	var dots = document.getElementsByClassName("demo");
-	if (n > x.length) {slideIndex = 1}
-	if (n < 1) {slideIndex = x.length}
-	for (i = 0; i < x.length; i++) {
-		x[i].style.display = "none";
-	}
-	for (i = 0; i < dots.length; i++) {
-		dots[i].className = dots[i].className.replace(" w3-white", "");
-	}
-	x[slideIndex-1].style.display = "block";
-	dots[slideIndex-1].className += " w3-white";
 }
